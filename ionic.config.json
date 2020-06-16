@@ -1,0 +1,7 @@
+{
+  "name": "cbxf-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

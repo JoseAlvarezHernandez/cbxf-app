@@ -1,6 +1,12 @@
 # Students APP
 
-## Steps
+## API
+
+first you will have to initialize your local API
+
+https://github.com/JoseAlvarezHernandez/cbxf-api-test
+
+## Steps to initialize app
 
 First execute 
 

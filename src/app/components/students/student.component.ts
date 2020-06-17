@@ -20,9 +20,10 @@ export class StudentComponent implements OnInit {
 
   constructor(private studentService: StudentService, private toastController: ToastController, private router: Router, private route: ActivatedRoute) {
     this.route.params.subscribe(param => {
-      this.id = param.id
-
-      this.loadStudent()
+      if (param.id) {
+        this.id = param.id
+        this.loadStudent()
+      }
     })
   }
 

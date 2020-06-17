@@ -135,3 +135,13 @@ dist
 
 # TernJS port file
 .tern-port
+
+e2e/folder.ini
+folder.ini
+resources/android/folder.ini
+resources/folder.ini
+resources/ios/folder.ini
+src/app/components/folder.ini
+src/app/folder.ini
+src/assets/folder.ini
+src/folder.ini

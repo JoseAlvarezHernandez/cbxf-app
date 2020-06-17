@@ -14,13 +14,21 @@ import { StudentService } from './students.service'
 })
 export class StudentsComponent implements OnInit {
   public students: any[] = []
+  public studentsCopy: any[] = []
   public searchQuery: string = ''
+  private male: boolean = true
+  private female: boolean = true
+  private ageCriteria: number
 
   constructor(private studentService: StudentService, private alertController: AlertController, private toastController: ToastController) {
-    this.initializeItems()
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
+
+  ionViewWillEnter() {
+    this.initializeItems()
+  }
 
   public async delete(student: any) {
     const alert = await this.alertController.create({
@@ -58,9 +66,10 @@ export class StudentsComponent implements OnInit {
     try {
       this.studentService.getAllStudents().subscribe(
         (result: any) => {
-          if (result.students)
+          if (result.students) {
             this.students = result.students
-          else
+            this.studentsCopy = this.students
+          } else
             this.students = []
         },
         error => {
@@ -72,15 +81,54 @@ export class StudentsComponent implements OnInit {
     }
   }
 
-  public getItems(ev: any) {
-    const val = ev.target.value;
+  public getItems(ev: any, isCheckBox: boolean) {
+    this.students = this.studentsCopy
+    const value = ev?.target?.value
 
-    if (val && val.trim() != '') {
+    this.students = this.students.filter((item) => {
+      let isReturn = false
+      if ((this.male && item.gender.toLowerCase().indexOf('hombre') > -1) || (this.female && item.gender.toLowerCase().indexOf('mujer') > -1)) {
+        isReturn = true
+      }
+
+      if (isReturn && !isCheckBox && value && value.trim() !== '') {
+        if (item.name.toLowerCase().indexOf(value.toLowerCase()) > -1 || item.age == value) {
+          isReturn = true
+        } else {
+          isReturn = false
+        }
+      }
+
+      return isReturn
+    })
+    /*
+    if (isCheckBox && typeof ev !== 'undefined') {
+      const val = ev.target.value;
+      this.students = this.studentsCopy
+      if (val && val.trim() != '') {
+        this.students = this.students.filter((item) => {
+          console.log(item.age)
+          console.log(val)
+          console.log(item.age.toString() == val.toString())
+          return item.age == val
+        })
+      }
+        
+    } else if (isCheckBox) {
+      this.students = this.studentsCopy
       this.students = this.students.filter((item) => {
-        return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        return (this.male && item.gender.toLowerCase().indexOf('hombre') > -1) || (this.female && item.gender.toLowerCase().indexOf('mujer') > -1)
       })
-    } else
-      this.initializeItems()
+    } else {
+      const val = ev.target.value;
+      if (val && val.trim() != '') {
+        this.students = this.students.filter((item) => {
+          return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1)
+        })
+      } else
+        this.students = this.studentsCopy
+    }
+    */
   }
 
   searchCancel() {

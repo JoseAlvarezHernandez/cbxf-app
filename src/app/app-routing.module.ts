@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { StudentModule } from './components/students/students.module'
+
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: './components/students/students.module#StudentModule'
+    loadChildren: './components/students/students.module#StudentsModule'
   }
 ];
 

@@ -54,10 +54,6 @@ export class StudentsComponent implements OnInit {
     toast.present()
   }
 
-  public createNewStudent() {
-    this.sendToast('whuhuuu')
-  }
-
   private initializeItems() {
     try {
       this.studentService.getAllStudents().subscribe(

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { FormsModule, FormBuilder } from '@angular/forms'
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -17,9 +18,11 @@ import { StudentService } from './components/students/students.service'
   imports: [
     HttpClientModule,
     BrowserModule,
+    FormsModule,
     IonicModule.forRoot(),
     AppRoutingModule],
   providers: [
+    FormBuilder,
     StudentService,
     StatusBar,
     SplashScreen,

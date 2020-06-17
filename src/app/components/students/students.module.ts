@@ -21,4 +21,4 @@ import { StudentService } from './students.service'
     declarations: [StudentsComponent],
     bootstrap: [StudentsComponent]
 })
-export class StudentModule { }
+export class StudentsModule { }

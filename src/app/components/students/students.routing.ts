@@ -6,7 +6,7 @@ import { StudentComponent } from './student.component'
 
 const routes: Routes = [
     { path: '', component: StudentsComponent },
-    { path: 'home', component: StudentsComponent },
+    { path: 'modify/:id', component: StudentComponent },
     { path: 'addStudent', component: StudentComponent }
 ];
 

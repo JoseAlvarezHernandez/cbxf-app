@@ -1,30 +1,47 @@
 <form [formGroup]="student">
     <ion-item>
-        <ion-label position="floating">Nombre</ion-label>
-        <ion-input type="text" required [(ngModel)]="student.name" ngControl="name" name="name"></ion-input>
+        <ion-label position="floating" color="primary">Nombre</ion-label>
+        <ion-input type="text" required [value]="student.name" (ionBlur)="onChange($event)" (input)="validateName($event)"
+            formControlName="name" ngControl="name" name="name">
+        </ion-input>
+        <div class="error-message">
+            {{errors?.name?.properties?.message}}
+        </div>
     </ion-item>
     <ion-item>
-        <ion-label position="floating">Edad</ion-label>
-        <ion-input type="number" required [(ngModel)]="student.age" name="age"></ion-input>
+        <ion-label position="floating" color="primary">Edad</ion-label>
+        <ion-input type="number" required [value]="student.age" [(ngModel)]="student.age" (ionBlur)="onChange($event)" name="age"></ion-input>
+        <div class="error-message">
+            {{errors?.age?.properties?.message}}
+        </div>
     </ion-item>
     <ion-list>
-        <ion-radio-group required [(ngModel)]="student.gender" name="gender">
+        <ion-radio-group required [value]="student.gender" [(ngModel)]="student.gender" (ionBlur)="onChange($event)" formControlName="gender"
+            name="gender">
             <ion-list-header>
-                <ion-label>Genero</ion-label>
+                <ion-label color="primary">Genero</ion-label>
+                <div class="error-message">
+                    {{errors?.gender?.properties?.message}}
+                </div>
             </ion-list-header>
             <ion-item>
                 <ion-label>Hombre</ion-label>
-                <ion-radio slot="start" value="Hombre"></ion-radio>
+                <ion-radio slot="start" name="gender" value="Hombre"></ion-radio>
             </ion-item>
             <ion-item>
                 <ion-label>Mujer</ion-label>
-                <ion-radio slot="start" value="Mujer"></ion-radio>
+                <ion-radio slot="start" name="gender" value="Mujer"></ion-radio>
             </ion-item>
         </ion-radio-group>
     </ion-list>
     <ion-item>
-        <ion-label  position="floating">Fecha de nacimiento</ion-label>
-        <ion-datetime displayFormat="DD/MM/YYYY" placeholder="Selecciona una fecha" required formControlName="birthDate" [(ngModel)]="student.birthDate" name="birthDate"></ion-datetime>
+        <ion-label position="floating" color="primary">Fecha de nacimiento</ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY" [value]="student.birthDate" placeholder="Selecciona una fecha" required formControlName="birthDate"
+            [(ngModel)]="student.birthDate" (ionBlur)="onChange($event)" name="birthDate" formControlName="birthDate">
+        </ion-datetime>
+        <div class="error-message">
+            {{errors?.birthDate?.properties?.message}}
+        </div>
     </ion-item>
-    <ion-button expand="block" type="submit" block (click)="submit($event)">Guardar</ion-button>
 </form>
+<ion-button expand="full" color="primary" (click)="submit()">Guardar</ion-button>

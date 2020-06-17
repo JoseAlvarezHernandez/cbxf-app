@@ -1,0 +1,1 @@
+You will have to use CORS plugin in order to execute a delete call

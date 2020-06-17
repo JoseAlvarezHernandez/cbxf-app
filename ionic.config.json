@@ -1,7 +1,8 @@
 {
   "name": "cbxf-app",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

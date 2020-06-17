@@ -1,0 +1,34 @@
+<ion-content>
+  <ion-refresher slot="fixed" pulling-text="Pull to refresh" (ionRefresh)="doRefresh()">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="person-add" routerLink="/addStudent" routerDirection="forward"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-toolbar>
+    <ion-searchbar showCancelButton="always" animated placeholder="Buscar estudiantes" [(ngModel)]="criteria"
+      (ionInput)="getItems($event)" (ionCancel)="searchCancel($event)">
+    </ion-searchbar>
+  </ion-toolbar>
+
+  <ion-list *ngIf="students.length">
+    <ion-item-sliding *ngFor="let student of students">
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        </ion-avatar>
+        <ion-label>{{student.name}} </ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option (click)="delete(student)">Eliminar</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-row>
+    <div class="ion-text-center noStudent" *ngIf="!students.length">No hay estudiantes que mostrar</div>
+  </ion-row>
+</ion-content>
